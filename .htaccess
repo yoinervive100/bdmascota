@@ -1,0 +1,10 @@
+
+ErrorDocument 404 /mascota/404.php
+ErrorDocument 403 /mascota/403.php
+
+Options -Indexes
+
+
+
+
+

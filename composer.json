@@ -1,0 +1,25 @@
+{
+
+  "name": "kawschool/mascota-online",
+  "description": "creacion de una base de datos mascota",
+  "type": "project",
+  "license": "MIT",
+   "authors": [
+     {
+        "name": "yoiner iguaran",
+        "email": "viveiguaran@gmail.com"
+     }
+     
+   ],
+    "require": {
+    
+    },
+    "autoload": {
+      "psr-4": {
+        "kawschool\\":"src/"
+      }
+    }
+
+
+
+}
