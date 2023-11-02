@@ -1,3 +1,13 @@
+<?php
+session_start();
+$sessi = $_SESSION["usuario"];
+if($sessi == null){
+  echo "usted no tiene autorizacion";
+  die();
+} 
+
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
