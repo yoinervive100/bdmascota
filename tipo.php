@@ -134,9 +134,9 @@ if($sessi == null){
        <nav class="nav_nave" >
         <div class="nav_enlaces">
           <a href="vacuna.php">vacuna</a>
-          <a href="#">role</a>
-          <a href="#">tipo</a>
-          <a href="#">user</a>
+          <a href="role.php">role</a>
+          <a href="tipo.php">tipo</a>
+          <a href="user.php">user</a>
         </div>
        </nav>
     </header>

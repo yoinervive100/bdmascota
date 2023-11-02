@@ -29,7 +29,7 @@ trait  Mascota{
      if ($usuario){
        session_start();
        $_SESSION["usuario"] = $nom;
-       header("location:create.php");
+       header("location:user.php");
      }else{
       ?>
       <h4 class="color">no existe</h4>
