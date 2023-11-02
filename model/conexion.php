@@ -58,7 +58,7 @@ trait  Mascota{
     if (isset($_POST["nomm"]) && isset($_POST["idd"])){
        $id = $_POST["nomm"];
        $nom = $_POST["idd"];
-       $pre = $this->conexion->prepare("INSERT INTO vacuna(id,nombre)VALUES(:id,:nombre)");
+       $pre = $this->conexion->prepare("INSERT INTO rol(id,nombre)VALUES(:id,:nombre)");
        $pre->bindParam('id',$id);
        $pre->bindParam('nombre',$nom);
        $pre->execute();
