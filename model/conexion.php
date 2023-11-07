@@ -90,6 +90,42 @@ trait  Mascota{
       $sql->execute();
     }
   }
+  public function raza(){
+    if(isset($_POST["idra"]) && isset($_POST["nomra"]) && isset($_POST["idmascot"])){
+      $id = $_POST["idra"];
+      $nombre = $_POST["nomra"];
+      $idmas = $_POST["idmascot"];
+      $con = $this->conexion->prepare("INSERT INTO raza(id,nombre,TipoMascota_id)VALUES(:id,:nombre,:mascota)");
+      $con->bindParam(':id',$id);
+      $con->bindParam('nombre',$nombre);
+      $con->bindParam('mascota',$idmas);
+      $con->execute();
+    }
+  }
+  public function mascota(){
+    if(isset($_POST["idmas"]) && isset($_POST["mascota"]) && isset($_POST["fecha"]) && isset($_FILES["imagen"]) && isset($_POST["iduser"]) && isset($_POST["idmascota"]) && isset($_POST["idraza"]) ){
+      $id = $_POST["idmas"];
+      $nombre = $_POST["mascota"];
+      $fecha = $_POST["fecha"];
+      $imagen = addslashes(file_get_contents($_FILES["imagen"]["tmp_name"]));
+      $user = $_POST["iduser"];
+      $mascota = $_POST["idmascota"];
+      $raza = $_POST["idraza"];
+      $con = $this->conexion->prepare("INSERT INTO mascota(id,nombre,FechaNacimiento,foto,User,TipoMascota_id,Raza_id)VALUES(:id,:nombre,:fecha,:imagen,:user,:mascota,:raza)");
+      $con->bindParam(':id',$id );
+      $con->bindParam(':nombre',$nombre);
+      $con->bindParam(':imagen',$imagen);
+      $con->bindParam(':fecha',$fecha);
+      $con->bindParam('user',$user);
+      $con->bindParam(':mascota',$mascota);
+      $con->bindParam('raza',$raza);
+      $con->execute();
+    }
+    $sql = $this->conexion->prepare("SELECT * FROM mascota");
+    $sql->execute();
+    $cont = $sql->setFetchMode(PDO::FETCH_ASSOC);
+    $result = $sql->fetchAll();
+  }
 
 }
 

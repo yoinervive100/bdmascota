@@ -13,4 +13,6 @@ $con->login();
 $con->user();
 $con->role();
 $con->vacuna();
+$con->raza();
+$con->mascota();
 ?>

@@ -8,7 +8,6 @@ if($sessi == null){
 
 ?>
 
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -17,18 +16,17 @@ if($sessi == null){
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,400;0,500;1,300&display=swap');
-    </style>
+     </style>
     <title>Document</title>
 </head>
-<body>
-    <style>
-      *{
-        margin: 0;
+<style>
+    *{
         padding: 0;
+        margin: 0;
         box-sizing: border-box;
         font-family: 'Roboto', sans-serif;
-      }
-      body{
+    }
+    body{
         background-image: url(img/img-animal.jpg);
         background-repeat: no-repeat;
         background-size: cover;
@@ -120,9 +118,10 @@ if($sessi == null){
       .titulo_user{
         font-size: 2.5vh;
       }
-    </style>
 
-<header>
+</style>
+<body>
+    <header>
         <div class="panel_admini" >
          <div class="titulo_user" >
            <h1>Panel De Administracion:</h1>
@@ -141,30 +140,75 @@ if($sessi == null){
          </div>
         </nav>
      </header>
-     <form action="" method="post">
-      <img src="img/logo-animal.png" alt="">
-      <div class="form_conte" >
-        <div class="formulario_registro" >
-          <div class="form_form" >
-            <label for="">ingrese el id</label>
-            <input type="text" placeholder="ingrese el id" name="idra" >
-          </div>
-          <div class="form_form" >
-            <label for="">Ingrese el nombre</label>
-            <input type="text" placeholder="ingrese la edad" name="nomra" >
-          </div>
-          <div class="form_form" >
-            <label for="">Ingrese el TipoMascota_id</label>
-            <input type="text" placeholder="ingrese el id" name="idmascot" >
-          </div>
-          <div class="buto_boton" >
-            <button type="submit">agregar</button>
+    <form action="" method="post" enctype="multipart/form-data" >
+        <img src="img/logo-animal.png" alt="">
+        <div class="form_conte" >
+          <div class="formulario_registro" >
+            <div class="form_form" >
+              <label for="">Ingrese el id</label>
+              <input type="text" placeholder="ingrese el id" name="idmas" >
+            </div>
+            <div class="form_form" >
+              <label for="">ingrese el nombre</label>
+              <input type="text" placeholder="ingrese el nombre" name="mascota" >
+            </div>
+            <div class="form_form" >
+              <label for="">Ingrese la FechaNacimiento</label>
+              <input type="datetime-local" name="fecha" >
+            </div>
+            <div class="form_form" >
+              <label for="">Ingrese la foto</label>
+              <input type="file"  name="imagen" >
+            </div>
+            <div class="form_form" >
+              <label for="">Ingrese el User_id</label>
+              <input type="text" placeholder="ingrese el id" name="iduser" >
+            </div>
+            <div class="form_form" >
+                <label for="">Ingrese el TipoMascota_id</label>
+                <input type="text" placeholder="ingrese el id" name="idmascota" >
+              </div>
+              <div class="form_form" >
+                <label for="">Ingrese el Raza_id</label>
+                <input type="text" placeholder="ingrese el id" name="idraza" >
+              </div>
+            <div class="buto_boton" >
+              <button type="submit">agregar</button>
+            </div>
+   
           </div>
         </div>
-      </div>
-      <?php
-        include_once "controller/connect.php";
-      ?>
-    </form>
+        <?php
+           include_once "controller/connect.php";
+        ?>
+      </form>
+      <table>
+        <thead>
+          <tr>
+            <th>ID</th>
+            <th>NOMBRE</th>
+            <th>FECHA</th>
+            <th>FOTO</th>
+            <th>USER_ID</th>
+            <th>TIPOMASCOTA</th>
+            <th>RAZA_ID</th>
+          </tr>
+        </thead>
+        <tbody>
+        <?php 
+
+           foreach($result as $resu){ ?>
+              <tr>
+                <td><?php echo $resu["id"]; ?></td>
+                <td><?php echo $resu["nombre"] ?></td>
+                <td><?php echo $resu["fecha"]?></td>
+                <td>image</td>
+                <td><?php echo $resu["user"] ?></td>
+                <td><?php echo $resu["mascota"]?></td>
+                <td><?php echo $resu["raza"] ?></td>
+              </tr>
+        <?php } ?>
+        </tbody>
+      </table>
 </body>
 </html>
