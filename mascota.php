@@ -118,9 +118,28 @@ if($sessi == null){
       .titulo_user{
         font-size: 2.5vh;
       }
+      table{
+        position: absolute;
+        left:0;
+        top: 120%;
+        background-color:bisque;
+        border-collapse: collapse;
+        text-align:center;
+      }
+      thead{
+        background-color:green;
+        border-bottom: solid 5px yellow;
+      }
+      th,td{
+        padding: 10px;
+      }
+      tr:nth-child(even){
+        background-color:#ddd;
+      }
 
 </style>
 <body>
+
     <header>
         <div class="panel_admini" >
          <div class="titulo_user" >
@@ -178,37 +197,11 @@ if($sessi == null){
    
           </div>
         </div>
-        <?php
-           include_once "controller/connect.php";
-        ?>
-      </form>
-      <table>
-        <thead>
-          <tr>
-            <th>ID</th>
-            <th>NOMBRE</th>
-            <th>FECHA</th>
-            <th>FOTO</th>
-            <th>USER_ID</th>
-            <th>TIPOMASCOTA</th>
-            <th>RAZA_ID</th>
-          </tr>
-        </thead>
-        <tbody>
-        <?php 
 
-           foreach($result as $resu){ ?>
-              <tr>
-                <td><?php echo $resu["id"]; ?></td>
-                <td><?php echo $resu["nombre"] ?></td>
-                <td><?php echo $resu["fecha"]?></td>
-                <td>image</td>
-                <td><?php echo $resu["user"] ?></td>
-                <td><?php echo $resu["mascota"]?></td>
-                <td><?php echo $resu["raza"] ?></td>
-              </tr>
-        <?php } ?>
-        </tbody>
-      </table>
+        <?php
+            include_once "controller/connect.php";
+        ?>
+
+
 </body>
 </html>

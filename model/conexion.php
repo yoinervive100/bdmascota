@@ -12,7 +12,7 @@ trait  Mascota{
     try {
       $this->conexion = new PDO("mysql:host=$this->servidor;dbname=$this->bd",$this->usuario,$this->password);
       $this->conexion->setAttribute(PDO::ATTR_ERRMODE,PDO::ERRMODE_EXCEPTION);
-      echo "conexion exitosa";
+    //  echo "conexion exitosa";
     } catch (PDOexception $error) {
          echo "fallo la conexion".$error->getMessage();
     }
@@ -101,13 +101,14 @@ trait  Mascota{
       $con->bindParam('mascota',$idmas);
       $con->execute();
     }
+
   }
   public function mascota(){
-    if(isset($_POST["idmas"]) && isset($_POST["mascota"]) && isset($_POST["fecha"]) && isset($_FILES["imagen"]) && isset($_POST["iduser"]) && isset($_POST["idmascota"]) && isset($_POST["idraza"]) ){
+    if(isset($_POST["idmas"]) && isset($_POST["mascota"]) && isset($_POST["fecha"])  && isset($_POST["iduser"]) && isset($_POST["idmascota"]) && isset($_POST["idraza"]) ){
       $id = $_POST["idmas"];
       $nombre = $_POST["mascota"];
       $fecha = $_POST["fecha"];
-      $imagen = addslashes(file_get_contents($_FILES["imagen"]["tmp_name"]));
+      $imagen = addslashes(file_get_contents($_FILES['imagen']['tmp_name']));
       $user = $_POST["iduser"];
       $mascota = $_POST["idmascota"];
       $raza = $_POST["idraza"];
@@ -125,6 +126,36 @@ trait  Mascota{
     $sql->execute();
     $cont = $sql->setFetchMode(PDO::FETCH_ASSOC);
     $result = $sql->fetchAll();
+      ?>
+      <table>
+      <thead>
+          <tr>
+            <th>ID</th>
+            <th>NOMBRE</th>
+            <th>FECHA</th>
+            <th>FOTO</th>
+            <th>USER_ID</th>
+            <th>TIPOMASCOTA</th>
+            <th>RAZA_ID</th>
+          </tr>
+        </thead>
+         <tbody>
+            <?php foreach($result as $resu){ ?> 
+              <tr>
+                <td><?php echo $resu['id']; ?></td>
+                <td><?php echo $resu['nombre']; ?></td>
+                <td><?php echo $resu['FechaNacimiento']; ?></td>
+                <td><img src="" ></td>
+                <td><?php echo $resu['User']; ?></td>
+                <td><?php echo $resu['TipoMascota_id']; ?></td>
+                <td><?php echo $resu['Raza_id']; ?></td>
+              </tr>
+              <?php }?>
+         </tbody>
+      </table>
+     <?php
+         
+
   }
 
 }
