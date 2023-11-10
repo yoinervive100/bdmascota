@@ -14,6 +14,7 @@ $con->user();
 $con->role();
 $con->vacuna();
 $con->raza();
+//$con->editar();
 
 
 ?>

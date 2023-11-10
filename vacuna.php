@@ -118,6 +118,24 @@ if($sessi == null){
       .titulo_user{
         font-size: 2.5vh;
       }
+      table{
+        position: absolute;
+        left:0;
+        top: 120%;
+        background-color:bisque;
+        border-collapse: collapse;
+        text-align:center;
+      }
+      thead{
+        background-color:green;
+        border-bottom: solid 5px yellow;
+      }
+      th,td{
+        padding: 10px;
+      }
+      tr:nth-child(even){
+        background-color:#ddd;
+      }
     </style>
      <header>
         <div class="panel_admini" >
@@ -152,7 +170,19 @@ if($sessi == null){
         </div>
         <?php
           include_once "controller/connect.php";
+         
         ?>
-    </form>
+      </form>  
+      <form action="" method="post">
+        <img src="img/logo-animal.png" alt="">
+        <h2>Editar</h2>
+        <div class="form_formulario" >
+            <label for="">ingrese el nombre</label><br>
+            <input type="text" name="th" placeholder="introduzca el nombre"><br>
+            <div class="buton_boton" >
+                <button type="submit" name="enviar" >actualizar</button>
+            </div>
+        
+        </div>
 </body>
 </html>

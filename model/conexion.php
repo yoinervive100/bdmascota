@@ -65,15 +65,55 @@ trait  Mascota{
     }
   }
   public function vacuna(){
-    if (isset($_POST["t1"]) && isset($_POST["t2"])){
+    if (isset($_POST["t1"]) && isset($_GET["t2"])){
        $t1 = $_POST["t1"];
        $t2 = $_POST["t2"];
        $vacu = $this->conexion->prepare("INSERT INTO vacuna(id,nombre)VALUES(:id,:nombre)");
        $vacu->bindParam('id',$t1);
        $vacu->bindParam('nombre',$t2);
        $vacu->execute();
+       echo "registro agregado";
     }
+    $sql = $this->conexion->prepare("SELECT * FROM vacuna");
+    $sql->execute();
+    $cont = $sql->setFetchMode(PDO::FETCH_ASSOC);
+    $result = $sql->fetchAll();
+    ?>
+    <table>
+    <thead>
+        <tr>
+          <th>ID</th>
+          <th>NOMBRE</th>
+          <th>ACCION</th>
+        </tr>
+      </thead>
+       <tbody>
+          <?php foreach($result as $resu){ ?> 
+            <tr>
+              <td><?php echo $resu['id']; ?></td>
+              <td><?php echo $resu['nombre']; ?></td>
+              <td><a href="vacuna.php?id=<?php echo $resu['id'];?>">editar</a></td>
+              <td><a href="">eliminar</a></td>
+            </tr>
+            <?php }?>
+       </tbody>
+    </table>  
+   <?php 
+       if($_GET){
+        if (isset($_POST["enviar"])) {
+          $t1=$_GET['id'];
+          echo $t1;
+          $nom = $_POST["th"];
+          $ex = $this->conexion->prepare("UPDATE vacuna SET nombre=:nombre  WHERE id=:id");
+          $ex->bindParam(':id',$t1);
+          $ex->bindParam(':nombre',$nom);
+          $ex->execute();
+        }
+        
+      }
   }
+
+
   public function tipo_mascota(){
     if(isset($_POST["id"]) && isset($_POST["nombre"]) && isset($_POST["edad"]) && isset($_POST["adulto"]) && isset($_POST["adult"])){
       $id = $_POST["id"];

@@ -9,4 +9,5 @@ class Tipo{
 $tipo = new Tipo();
 $tipo->mascota();
 
+
 ?>
