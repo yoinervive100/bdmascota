@@ -180,17 +180,12 @@ if($sessi == null){
               <input type="file"  name="imagen" >
             </div>
             <div class="form_form" >
-              <label for="">Ingrese el User_id</label>
-              <input type="text" placeholder="ingrese el id" name="iduser" >
-            </div>
-            <div class="form_form" >
-                <label for="">Ingrese el TipoMascota_id</label>
-                <input type="text" placeholder="ingrese el id" name="idmascota" >
+                <label for="">Ingrese el usuario</label>
+                <input type="text" placeholder="ingrese el id" name="iduser" >
               </div>
-              <div class="form_form" >
-                <label for="">Ingrese el Raza_id</label>
-                <input type="text" placeholder="ingrese el id" name="idraza" >
-              </div>
+             <?php
+                include_once "controller/mascota.php";
+             ?>
             <div class="buto_boton" >
               <button type="submit">agregar</button>
             </div>
@@ -198,9 +193,6 @@ if($sessi == null){
           </div>
         </div>
 
-        <?php
-            include_once "controller/mascota.php";
-        ?>
 
 
 </body>

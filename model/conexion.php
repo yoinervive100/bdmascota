@@ -65,7 +65,7 @@ trait  Mascota{
     }
   }
   public function vacuna(){
-    if (isset($_POST["t1"]) && isset($_GET["t2"])){
+    if (isset($_POST["t1"]) && isset($_POST["t2"])){
        $t1 = $_POST["t1"];
        $t2 = $_POST["t2"];
        $vacu = $this->conexion->prepare("INSERT INTO vacuna(id,nombre)VALUES(:id,:nombre)");
@@ -121,7 +121,7 @@ trait  Mascota{
       $edad = $_POST["edad"];
       $adulto = $_POST["adulto"];
       $adult = $_POST["adult"];
-      $sql = $this->conexion->prepare("INSERT INTO tipomascota(id,nombre,EdadEquivalenteJoven,EdadEquivalenteAdulto,EdadAdulto)VALUES(:id,:nombre,:edad,:adulto,:adult)");
+      $sql = $this->conexion->prepare("INSERT INTO tipomascota(id,nombre_mascota,EdadEquivalenteJoven,EdadEquivalenteAdulto,EdadAdulto)VALUES(:id,:nombre,:edad,:adulto,:adult)");
       $sql->bindParam(':nombre',$nombre);
       $sql->bindParam(':id',$id);
       $sql->bindParam(':edad',$edad);
@@ -135,7 +135,7 @@ trait  Mascota{
       $id = $_POST["idra"];
       $nombre = $_POST["nomra"];
       $idmas = $_POST["idmascot"];
-      $con = $this->conexion->prepare("INSERT INTO raza(id,nombre,TipoMascota_id)VALUES(:id,:nombre,:mascota)");
+      $con = $this->conexion->prepare("INSERT INTO raza(id,nombre_raza,TipoMascota_id)VALUES(:id,:nombre,:mascota)");
       $con->bindParam(':id',$id);
       $con->bindParam('nombre',$nombre);
       $con->bindParam('mascota',$idmas);
@@ -152,20 +152,61 @@ trait  Mascota{
       $user = $_POST["iduser"];
       $mascota = $_POST["idmascota"];
       $raza = $_POST["idraza"];
-      $con = $this->conexion->prepare("INSERT INTO mascota(id,nombre,FechaNacimiento,foto,User,TipoMascota_id,Raza_id)VALUES(:id,:nombre,:fecha,:imagen,:user,:mascota,:raza)");
+      $con = $this->conexion->prepare("INSERT INTO mascota(id,nombre,FechaNacimiento,User,foto,TipoMascota_id,Raza_id)VALUES(:id,:nombre,:fecha,:user,:imagen,:mascota,:raza)");
       $con->bindParam(':id',$id );
       $con->bindParam(':nombre',$nombre);
       $con->bindParam(':imagen',$imagen);
       $con->bindParam(':fecha',$fecha);
-      $con->bindParam('user',$user);
+      $con->bindParam(':user',$user);
       $con->bindParam(':mascota',$mascota);
-      $con->bindParam('raza',$raza);
+      $con->bindParam(':raza',$raza);
       $con->execute();
     }
-    $sql = $this->conexion->prepare("SELECT * FROM mascota");
+    $sql = $this->conexion->prepare("SELECT m.id, m.nombre, m.FechaNacimiento, r.nombre_raza, t.nombre_mascota FROM mascota m 
+    INNER JOIN raza r
+    on m.Raza_id = r.id
+    INNER JOIN tipomascota t
+    ON m.TipoMascota_id = t.id
+    ORDER BY m.id ASC;");
     $sql->execute();
     $cont = $sql->setFetchMode(PDO::FETCH_ASSOC);
     $result = $sql->fetchAll();
+           ?>
+                <div class="form_form" >
+                  <label for="">Ingrese la raza</label>
+                  <select name="idraza" id="">
+                   <option  value="">seleccionar</option>
+                    <?php
+                      $sql = $this->conexion->prepare("SELECT * FROM raza");
+                      $sql->execute();
+                      while($fila = $sql->fetch(PDO::FETCH_ASSOC)){
+                          echo "<option value='".$fila['id']."'>".$fila['nombre_raza']."</option>";
+                        
+                      }
+                   ?>
+                </select>
+              </div>
+           <?php
+
+             ?>
+             
+                <div class="form_form" >
+                  <label for="">Ingrese la raza</label>
+                  <select name="idmascota" id="">
+                   <option  value="">seleccionar</option>
+                    <?php
+                      $sql = $this->conexion->prepare("SELECT * FROM tipomascota");
+                      $sql->execute();
+                      $fila = $sql->setFetchMode(PDO::FETCH_ASSOC);
+                      $mila = $sql->fetchAll(); 
+                      foreach( $mila as $fila ){
+                          echo "<option value='".$fila['id']."'>".$fila['nombre_mascota']."</option>";
+                        
+                      }
+                   ?>
+                </select>
+              </div>
+           <?php
       ?>
       <table>
       <thead>
@@ -173,10 +214,8 @@ trait  Mascota{
             <th>ID</th>
             <th>NOMBRE</th>
             <th>FECHA</th>
-            <th>FOTO</th>
-            <th>USER_ID</th>
-            <th>TIPOMASCOTA</th>
-            <th>RAZA_ID</th>
+            <th>RAZA</th>
+            <th>TIPO MASCOTA</th>
           </tr>
         </thead>
          <tbody>
@@ -184,11 +223,10 @@ trait  Mascota{
               <tr>
                 <td><?php echo $resu['id']; ?></td>
                 <td><?php echo $resu['nombre']; ?></td>
-                <td><?php echo $resu['FechaNacimiento']; ?></td>
-                <td><img src="" ></td>
-                <td><?php echo $resu['User']; ?></td>
-                <td><?php echo $resu['TipoMascota_id']; ?></td>
-                <td><?php echo $resu['Raza_id']; ?></td>
+                <td><?php echo $resu['FechaNacimiento'];?></td>
+                <td><?php echo $resu['nombre_raza']  ?></td>
+                <td><?php echo $resu['nombre_mascota']; ?></td>
+                
               </tr>
               <?php }?>
          </tbody>
@@ -197,6 +235,7 @@ trait  Mascota{
          
 
   }
+
 
 }
 
