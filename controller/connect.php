@@ -12,7 +12,7 @@ $con->tipo_mascota();
 $con->login();
 $con->user();
 $con->role();
-$con->raza();
+
 //$con->editar();
 
 

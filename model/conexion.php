@@ -94,7 +94,7 @@ trait  Mascota{
             <tr>
               <td><?php echo $resu['id']; ?></td>
               <td><?php echo $resu['nombre']; ?></td>
-              <td><a href="vacuna.php?id=<?php echo $resu['id'];?>">editar</a></td>
+              <td><a href="vacuna.php?id=<?php echo $resu['id'];?>">editar</a></td>b
               <td><a href="">eliminar</a></td>
             </tr>
             <?php }?>

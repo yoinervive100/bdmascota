@@ -175,7 +175,7 @@ if($sessi == null){
         </div>
       </div>
       <?php
-        include_once "controller/connect.php";
+        include_once "controller/raza.php";
       ?>
           <div class="buto_boton" >
             <button type="submit">agregar</button>
