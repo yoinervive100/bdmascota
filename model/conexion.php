@@ -71,8 +71,9 @@ trait  Mascota{
        $vacu = $this->conexion->prepare("INSERT INTO vacuna(id,nombre)VALUES(:id,:nombre)");
        $vacu->bindParam('id',$t1);
        $vacu->bindParam('nombre',$t2);
-       $vacu->execute();
-       echo "registro agregado";
+       if ($vacu->execute()) {
+        echo "<script>alert('registro exitoso');</script>";
+       }
     }
     $sql = $this->conexion->prepare("SELECT * FROM vacuna");
     $sql->execute();
@@ -84,7 +85,8 @@ trait  Mascota{
         <tr>
           <th>ID</th>
           <th>NOMBRE</th>
-          <th>ACCION</th>
+          <th>EDITAR</th>
+          <th>ELIMINAR</th>
         </tr>
       </thead>
        <tbody>
@@ -99,19 +101,26 @@ trait  Mascota{
        </tbody>
     </table>  
    <?php 
-       if($_GET){
-        if (isset($_POST["enviar"])) {
-          $t1=$_GET['id'];
-          echo $t1;
-          $nom = $_POST["th"];
-          $ex = $this->conexion->prepare("UPDATE vacuna SET nombre=:nombre  WHERE id=:id");
-          $ex->bindParam(':id',$t1);
-          $ex->bindParam(':nombre',$nom);
-          $ex->execute();
-        }
-        
+     if($_GET){
+        if (isset($_POST["enviar"])){
+            $t1=$_GET['id'];
+            //echo $t1;
+            $nom = $_POST["th"];
+            $ex = $this->conexion->prepare("UPDATE vacuna SET nombre=:nombre  WHERE id=:id");
+            $ex->bindParam(':id',$t1);
+            $ex->bindParam(':nombre',$nom);
+            if ($ex->execute()) {
+               echo "<script>alert('actualizado');</script>";
+            }
+          }
       }
-  }
+      if ($_GET){
+        $bo = $_GET['id'];
+        $borar = $this->conexion->prepare("DELETE FROM vacuna WHERE id=:id");
+        $borar->bindParam(':id',$bo);
+        $borar->execute();
+      }
+      }
 
 
   public function tipo_mascota(){
@@ -141,6 +150,51 @@ trait  Mascota{
       $con->bindParam('mascota',$idmas);
       $con->execute();
     }
+    $nu = $this->conexion->prepare("SELECT r.id, r.nombre_raza,count(m.Raza_id) raza FROM mascota m
+    INNER JOIN raza r
+    ON m.Raza_id = r.id
+    GROUP BY r.id, r.nombre_raza");
+    $nu->execute();
+    $re = $nu->setFetchMode(PDO::FETCH_ASSOC);
+    $girar = $nu->fetchAll();
+    ?>
+    <div class="form_form" >
+      <select name="idmascot" id="">
+        <option value="">Seleccionar
+          <?php
+            $conexi = $this->conexion->prepare("SELECT * FROM tipomascota"); 
+            $conexi->execute();
+            $con = $conexi->setFetchMode(PDO::FETCH_ASSOC);
+            $nueva = $conexi->fetchAll(); 
+            foreach($nueva as $con){
+              echo "<option value='".$con['id']."'>".$con['nombre_mascota']." </option>";
+
+            }
+        ?>
+       </option>
+      </select>
+    </div> 
+    <?php
+    ?>
+    <table>
+      <thead>
+        <tr>
+          <th>ID</th>
+          <th>NOMBRE</th>
+          <th>CANTIDAD</th>
+        </tr>
+      </thead>
+      <tbody>
+        <?php foreach($girar as $mostrar){ ?> 
+          <tr>
+            <td><?php echo $mostrar['id'] ?></td>
+            <td><?php echo $mostrar['nombre_raza'] ?></td>
+            <td><?php echo $mostrar['raza'] ?></td>
+            </tr>
+          <?php }?>
+      </tbody>
+    </table>
+    <?php
 
   }
   public function mascota(){
@@ -191,7 +245,7 @@ trait  Mascota{
              ?>
              
                 <div class="form_form" >
-                  <label for="">Ingrese la raza</label>
+                  <label for="">Ingrese el tipo mascota</label>
                   <select name="idmascota" id="">
                    <option  value="">seleccionar</option>
                     <?php

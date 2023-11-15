@@ -120,6 +120,24 @@ if($sessi == null){
       .titulo_user{
         font-size: 2.5vh;
       }
+      table{
+        position: absolute;
+        left:0;
+        top: 120%;
+        background-color:bisque;
+        border-collapse: collapse;
+        text-align:center;
+      }
+      thead{
+        background-color:green;
+        border-bottom: solid 5px yellow;
+      }
+      th,td{
+        padding: 10px;
+      }
+      tr:nth-child(even){
+        background-color:#ddd;
+      }
     </style>
 
 <header>
@@ -153,18 +171,15 @@ if($sessi == null){
             <label for="">Ingrese el nombre</label>
             <input type="text" placeholder="ingrese la edad" name="nomra" >
           </div>
-          <div class="form_form" >
-            <label for="">Ingrese el TipoMascota_id</label>
-            <input type="text" placeholder="ingrese el id" name="idmascot" >
-          </div>
-          <div class="buto_boton" >
-            <button type="submit">agregar</button>
-          </div>
+
         </div>
       </div>
       <?php
         include_once "controller/connect.php";
       ?>
+          <div class="buto_boton" >
+            <button type="submit">agregar</button>
+          </div>
     </form>
 </body>
 </html>
