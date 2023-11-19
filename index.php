@@ -18,18 +18,18 @@
             font-family: 'Roboto', sans-serif;
         }
         body{
-            background-image: url(img/img-gatos.jpg);
+            background-image: url(img/vector-fondo.jpg);
             background-repeat: no-repeat;
             background-size: cover;
-            height: 80vh; 
+            height: 100%; 
         }
         h1{
            text-align: center;
         }
         form{
             background-color: rgba(255, 255, 255, 0.586);
-            width: 45vh;
-            padding: 5vh 2vh;
+            width: 65vh;
+            padding: 2vh 2vh;
             display: flex;
             flex-direction: column;
             justify-content: center;
@@ -37,14 +37,14 @@
             gap: 3vh;
             border-radius: 2vh;
             margin: auto;
-            margin-top: 20vh;
+            margin-top: 14vh;
   
         }
         .input_wars{
             display: flex;
             flex-direction: column;
             justify-content: center;
-            padding-top: 1vh;
+            padding-top: -3vh;
             padding-left: 2vh;
         }
         .input_wars img{
@@ -69,6 +69,7 @@
         display: flex;
         justify-content: center;
         align-items: center;
+        padding: 1vh;
       }
       .enviar button{
         padding: 1.5vh 5vh;
@@ -91,9 +92,43 @@
       h4{
         font-size: 3vh;
       }
+      .login_fondo{
+        background-image: url(img/fondo-login.jpg);
+        background-repeat: no-repeat;
+        background-size: cover;
+        width:65vh;
+        margin-top: -7vh;
+        border-top-left-radius: 2vh;
+        border-top-right-radius: 2vh;
+        font-size:2vh;
+        color: white;
+      }
+      .login_fondo h2{
+        padding: 0 1vh;
+      }
+      .login_log{
+        display: flex;
+        justify-content: center;
+        padding: 0 30vh;
+      }
+      .img_veterinario img{
+        height: 30vh;
+      }
+
     </style>
    
    <form action="" method="post">
+    <div class="login_fondo">
+      <div class="login_log" >
+        <div class="login_title" >
+      
+        </div>
+        <div class="img_veterinario" >
+          <img src="img/vector-nuevo.png" alt="">
+        </div>
+      </div>
+      <h2>Quien ama a los animales  ama al ser humano.</h2>
+    </div>
     <h1>Iniciar sesion</h1>
 
     <div class="input_wars" >

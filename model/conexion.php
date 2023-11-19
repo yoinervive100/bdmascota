@@ -94,7 +94,7 @@ trait  Mascota{
             <tr>
               <td><?php echo $resu['id']; ?></td>
               <td><?php echo $resu['nombre']; ?></td>
-              <td><a href="vacuna.php?id=<?php echo $resu['id'];?>">editar</a></td>b
+              <td><a href="vacuna.php?id=<?php echo $resu['id'];?>">editar</a></td>
               <td><a href="">eliminar</a></td>
             </tr>
             <?php }?>
@@ -114,12 +114,7 @@ trait  Mascota{
             }
           }
       }
-      if ($_GET){
-        $bo = $_GET['id'];
-        $borar = $this->conexion->prepare("DELETE FROM vacuna WHERE id=:id");
-        $borar->bindParam(':id',$bo);
-        $borar->execute();
-      }
+  
       }
 
 
@@ -198,25 +193,64 @@ trait  Mascota{
 
   }
   public function mascota(){
+
+
+  
     if(isset($_POST["idmas"]) && isset($_POST["mascota"]) && isset($_POST["fecha"])  && isset($_POST["iduser"]) && isset($_POST["idmascota"]) && isset($_POST["idraza"]) ){
       $id = $_POST["idmas"];
       $nombre = $_POST["mascota"];
       $fecha = $_POST["fecha"];
-      $imagen = addslashes(file_get_contents($_FILES['imagen']['tmp_name']));
+      //$imagen = addslashes(file_get_contents($_FILES['imagen']['tmp_name']));
       $user = $_POST["iduser"];
       $mascota = $_POST["idmascota"];
       $raza = $_POST["idraza"];
-      $con = $this->conexion->prepare("INSERT INTO mascota(id,nombre,FechaNacimiento,User,foto,TipoMascota_id,Raza_id)VALUES(:id,:nombre,:fecha,:user,:imagen,:mascota,:raza)");
+      $con = $this->conexion->prepare("INSERT INTO mascota(id,nombre,FechaNacimiento,User,foto,TipoMascota_id,Raza_id)VALUES(:id,:nombre,:fecha,:user,NULL,:mascota,:raza)");
       $con->bindParam(':id',$id );
       $con->bindParam(':nombre',$nombre);
-      $con->bindParam(':imagen',$imagen);
+      //$con->bindParam(':imagen',$imagen);
       $con->bindParam(':fecha',$fecha);
       $con->bindParam(':user',$user);
       $con->bindParam(':mascota',$mascota);
       $con->bindParam(':raza',$raza);
       $con->execute();
     }
-    $sql = $this->conexion->prepare("SELECT m.id, m.nombre, m.FechaNacimiento, r.nombre_raza, t.nombre_mascota FROM mascota m 
+    if (isset($_POST["fecha"])){
+       $buscar = $_POST["fecha"];
+       $sql = $this->conexion->prepare("SELECT m.id, m.nombre, m.FechaNacimiento, r.nombre_raza, t.nombre_mascota FROM mascota m 
+       INNER JOIN raza r
+       on m.Raza_id = r.id
+       INNER JOIN tipomascota t
+       ON m.TipoMascota_id = t.id
+       where m.nombre = '$buscar';");
+       $sql->execute();
+       $cont = $sql->setFetchMode(PDO::FETCH_ASSOC);
+       $result = $sql->fetchAll();
+       ?>
+       <table>
+       <thead>
+           <tr>
+             <th>ID</th>
+             <th>NOMBRE</th>
+             <th>FECHA</th>
+             <th>RAZA</th>
+             <th>TIPO MASCOTA</th>
+           </tr>
+         </thead>
+          <tbody>
+             <?php foreach($result as $resu){ ?> 
+               <tr>
+                 <td><?php echo $resu['id']; ?></td>
+                 <td><?php echo $resu['nombre']; ?></td>
+                 <td><?php echo $resu['FechaNacimiento'];?></td>
+                 <td><?php echo $resu['nombre_raza']  ?></td>
+                 <td><?php echo $resu['nombre_mascota']; ?></td>
+               </tr>
+               <?php }?>
+          </tbody>
+       </table>
+      <?php  
+    }else {
+      $sql = $this->conexion->prepare("SELECT m.id, m.nombre, m.FechaNacimiento, r.nombre_raza, t.nombre_mascota FROM mascota m 
     INNER JOIN raza r
     on m.Raza_id = r.id
     INNER JOIN tipomascota t
@@ -225,6 +259,7 @@ trait  Mascota{
     $sql->execute();
     $cont = $sql->setFetchMode(PDO::FETCH_ASSOC);
     $result = $sql->fetchAll();
+
            ?>
                 <div class="form_form" >
                   <label for="">Ingrese la raza</label>
@@ -280,16 +315,15 @@ trait  Mascota{
                 <td><?php echo $resu['FechaNacimiento'];?></td>
                 <td><?php echo $resu['nombre_raza']  ?></td>
                 <td><?php echo $resu['nombre_mascota']; ?></td>
-                
               </tr>
               <?php }?>
          </tbody>
       </table>
-     <?php
-         
+     <?php  
+    }
+    
 
   }
-
 
 }
 

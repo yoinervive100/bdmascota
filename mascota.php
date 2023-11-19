@@ -173,7 +173,7 @@ if($sessi == null){
             </div>
             <div class="form_form" >
               <label for="">Ingrese la FechaNacimiento</label>
-              <input type="datetime-local" name="fecha" >
+              <input type="date" name="fecha" >
             </div>
             <div class="form_form" >
               <label for="">Ingrese la foto</label>
@@ -181,7 +181,7 @@ if($sessi == null){
             </div>
             <div class="form_form" >
                 <label for="">Ingrese el usuario</label>
-                <input type="text" placeholder="ingrese el id" name="iduser" >
+                <input type="text" placeholder="ingrese el id" name="iduser">
               </div>
              <?php
                 include_once "controller/mascota.php";
@@ -192,8 +192,13 @@ if($sessi == null){
    
           </div>
         </div>
+      </form>
 
-
+      <form action="" method="POST">
+              <label for="">Ingrese la FechaNacimiento</label>
+              <input type="text" name="fecha" >
+        <button type="submit" name="consultor" >consultar</button>
+      </form>
 
 </body>
 </html>

@@ -10,4 +10,5 @@ $tipo = new Tipo();
 $tipo->mascota();
 
 
+
 ?>
