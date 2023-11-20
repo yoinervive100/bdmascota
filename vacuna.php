@@ -28,32 +28,29 @@ if($sessi == null){
           font-family: 'Roboto', sans-serif;
         }
         body{
-            background-image: url(img/img-animal.jpg);
+            background-image: url(img/vector-fondo.jpg);
             background-repeat: no-repeat;
             background-size: cover;
             height: 100vh;
         }
         header{
-         display: flex;
-         flex-direction: column;
-         background-color: cornsilk;
-        }
+        display: flex;
+        flex-direction: column;
+        background-color: cornsilk;
+        background: linear-gradient(90deg, rgba(2,0,36,1) 0%, rgba(115,15,222,1) 0%, rgba(0,212,255,1) 100%);
+        color: white;
+      }
       .panel_admini{
         display: flex;
         justify-content: space-between;
         align-items: center;
         padding: 1vh 3vh;
       }
-      .cerrar_sesion{
-        background-color:green;
-        text-decoration: none;
-        color: white;
-        padding: 1vh 2vh;
-        border-radius: 1vh;
-        font-size: 2.5vh;
+      .cerrar_sesion img{
+        height: 12vh;
       }
-      .nav_nave{
-        background-color: aliceblue;
+      .nav_nave{     
+        background: linear-gradient(90deg, rgba(2,0,36,1) 0%, rgba(115,15,222,1) 0%, rgba(0,44,255,1) 100%);
         padding: 1vh;
         display: flex;
         justify-content: center;
@@ -67,13 +64,12 @@ if($sessi == null){
         color: black;
       }
       .nav_enlaces a:hover{
-        color: green;
+        color: white;
       }
       a{
         text-decoration: none;
       }
       form{
-        background-color: aqua;
         width: 30vh;
         margin: auto;
         display: flex;
@@ -84,6 +80,7 @@ if($sessi == null){
         border-radius: 1vh;
         gap: 1vh;
         margin-top: 14vh;
+        margin-left: 14vh;
       }
       img{
         height: 17vh;
@@ -117,34 +114,64 @@ if($sessi == null){
       }
       .titulo_user{
         font-size: 2.5vh;
+        display: flex;
+        align-items: center;
+        gap:2vh; 
+      }
+      .titulo_user img{
+        height: 12vh;
+      }
+      .form_conte{
+        background: linear-gradient(90deg, rgba(2,0,36,1) 0%, rgba(57,163,214,1) 0%, rgba(0,44,255,1) 100%);
+        padding: 2vh 5vh;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        border-radius: 7px;
       }
       table{
         position: absolute;
-        left:0;
-        top: 120%;
-        background-color:bisque;
+        left:60vh;
+        top: 38vh;
+        background: linear-gradient(90deg, rgba(2,0,36,1) 0%, rgba(112,57,214,1) 0%, rgba(92,55,221,1) 58%, rgba(0,44,255,1) 100%);
         border-collapse: collapse;
         text-align:center;
+        color:#131eda;
       }
       thead{
         background-color:green;
         border-bottom: solid 5px yellow;
       }
       th,td{
-        padding: 10px;
+        padding: 10px 17px;
+      }
+      td{
+        color:white;
       }
       tr:nth-child(even){
-        background-color:#ddd;
+        background: linear-gradient(90deg, rgba(2,0,36,1) 0%, rgba(112,57,214,1) 0%, rgba(0,44,255,1) 100%);
+
+      }
+      td img{
+        height: 2.5vh;
+      }
+      .color_delete{
+        background-color:red;
       }
     </style>
-     <header>
+    <header>
         <div class="panel_admini" >
          <div class="titulo_user" >
-           <h1>Panel De Administracion:</h1>
-           <h2>Bienvenido: <?php echo $_SESSION["usuario"] ?> </h2>
+          <div class="img_logo" >
+            <img src="img/logo-animal.png" alt="">
+          </div>
+          <div class="panel_user" >
+            <h1>Panel De Administracion:</h1>
+            <h2>Bienvenido: <?php echo $_SESSION["usuario"] ?> </h2>
+          </div>
          </div>
-          <nav>
-           <a href="cerrar.php" class="cerrar_sesion" >cerrar sesion</a>
+          <nav> 
+            <a href="cerrar.php" class="cerrar_sesion" ><img src="img/vector-salir.png" alt=""></a>
           </nav> 
         </div>
         <nav class="nav_nave" >
@@ -157,7 +184,8 @@ if($sessi == null){
         </nav>
      </header>
     <form action="" method="post">
-        <img src="img/logo-animal.png" alt="">
+      <div class="form_conte" >
+       <img src="img/logo-animal.png" alt="">
         <div class="form_formulario" >
             <label for="">ingrese el id</label><br>
             <input type="text" name="t1" placeholder="introduzca el id"><br>
@@ -168,12 +196,14 @@ if($sessi == null){
             </div>
         
         </div>
+      </div>
         <?php
           include_once "controller/vacuna.php";
          
         ?>
       </form>  
       <form action="" method="post">
+        <div class="form_conte" >
         <img src="img/logo-animal.png" alt="">
         <h2>Editar</h2>
         <div class="form_formulario" >
@@ -183,6 +213,7 @@ if($sessi == null){
                 <button type="submit" name="enviar" >actualizar</button>
             </div>
         
+        </div>
         </div>
 </body>
 </html>

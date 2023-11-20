@@ -124,9 +124,10 @@ if($sessi == null){
         position: absolute;
         top: 40vh;
         left: 65vh;
-        background-color:bisque;
+        background: linear-gradient(90deg, rgba(2,0,36,1) 0%, rgba(112,57,214,1) 0%, rgba(92,55,221,1) 58%, rgba(0,44,255,1) 100%);
         border-collapse: collapse;
         text-align:center;
+        color:#131eda;
       }
       thead{
         background-color:green;
@@ -135,8 +136,12 @@ if($sessi == null){
       th,td{
         padding: 10px 20px ;
       }
+      td{
+        color:white;
+      }
       tr:nth-child(even){
-        background-color:#ddd;
+        background: linear-gradient(90deg, rgba(2,0,36,1) 0%, rgba(112,57,214,1) 0%, rgba(0,44,255,1) 100%);
+
       }
       td img{
         height: 2.5vh;

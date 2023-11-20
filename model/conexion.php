@@ -94,8 +94,8 @@ trait  Mascota{
             <tr>
               <td><?php echo $resu['id']; ?></td>
               <td><?php echo $resu['nombre']; ?></td>
-              <td><a href="vacuna.php?id=<?php echo $resu['id'];?>">editar</a></td>
-              <td><a href="">eliminar</a></td>
+              <td><button><a href=""><img src="img/vector-lapiz.png" alt=""></a></button></td>
+              <td><button class="color_delete" ><a href=""><img src="img/vector-basura.png" alt=""></a></button></td>
             </tr>
             <?php }?>
        </tbody>
@@ -210,7 +210,13 @@ trait  Mascota{
       $con->bindParam(':user',$user);
       $con->bindParam(':mascota',$mascota);
       $con->bindParam(':raza',$raza);
-      $con->execute();
+      if ($con->execute()) {
+        echo "<script>alert('actualizado');</script>";
+      }else{
+        ?>
+         <h4>error el registro</h4>
+        <?php
+      }
     }
     if (isset($_POST["fecha"]) && isset($_POST["fecha1"])){
        $buscar = $_POST["fecha"];

@@ -37,6 +37,8 @@ if($sessi == null){
         display: flex;
         flex-direction: column;
         background-color: cornsilk;
+        background: linear-gradient(90deg, rgba(2,0,36,1) 0%, rgba(115,15,222,1) 0%, rgba(0,212,255,1) 100%);
+        color: white;
       }
       .panel_admini{
         display: flex;
@@ -44,16 +46,10 @@ if($sessi == null){
         align-items: center;
         padding: 1vh 3vh;
       }
-      .cerrar_sesion{
-        background-color:green;
-        text-decoration: none;
-        color: white;
-        padding: 1vh 2vh;
-        border-radius: 1vh;
-        font-size: 2.5vh;
+      .cerrar_sesion img{
+        height: 12vh;
       }
       form{
-        background-color: aqua;
         width: 50vh;
         display: flex;
         align-items: center;
@@ -61,7 +57,7 @@ if($sessi == null){
         flex-direction: column;
         margin: auto;
         margin-top: 5vh;
-        border-radius: 7px;
+        margin-left: 5vh;
         padding: 2vh;
       }
       .form_form{
@@ -83,6 +79,47 @@ if($sessi == null){
         display: flex;
         justify-content: center;
         padding: 1vh;
+      }
+      button{
+        color: white;
+        background-color: green;
+        padding: 1vh 3vh;
+        border: none;
+        cursor: pointer;
+        border-radius: 1vh;
+        font-size: 2vh;
+      }
+      .nav_nave{
+        background: linear-gradient(90deg, rgba(2,0,36,1) 0%, rgba(115,15,222,1) 0%, rgba(0,44,255,1) 100%);
+        padding: 1vh;
+        display: flex;
+        justify-content: center;
+      }
+      .nav_enlaces{
+        display: flex;
+        gap: 3vh;
+        font-size: 2.5vh;
+      }
+      .nav_enlaces a{
+        color: black;
+      }
+      .nav_enlaces a:hover{
+        color: white;
+      }
+      a{
+        text-decoration: none;
+      }
+      label{
+        font-size: 2.5vh;
+      }
+      .titulo_user{
+        font-size: 2.5vh;
+        display: flex;
+        align-items: center;
+        gap: 2vh;
+      }
+      .titulo_user img{
+        height: 12vh;
       }
       button{
         color: white;
@@ -122,24 +159,29 @@ if($sessi == null){
 
     </style>
     <header>
-       <div class="panel_admini" >
-        <div class="titulo_user" >
-          <h1>Panel De Administracion:</h1>
-          <h2>Bienvenido: <?php echo $_SESSION["usuario"] ?> </h2>
+        <div class="panel_admini" >
+         <div class="titulo_user" >
+          <div class="img_logo" >
+            <img src="img/logo-animal.png" alt="">
+          </div>
+          <div class="panel_user" >
+            <h1>Panel De Administracion:</h1>
+            <h2>Bienvenido: <?php echo $_SESSION["usuario"] ?> </h2>
+          </div>
+         </div>
+          <nav> 
+            <a href="cerrar.php" class="cerrar_sesion" ><img src="img/vector-salir.png" alt=""></a>
+          </nav> 
         </div>
-         <nav>
-          <a href="cerrar.php" class="cerrar_sesion" >cerrar sesion</a>
-         </nav> 
-       </div>
-       <nav class="nav_nave" >
-        <div class="nav_enlaces">
-          <a href="vacuna.php">vacuna</a>
-          <a href="role.php">role</a>
-          <a href="tipo.php">tipo</a>
-          <a href="user.php">user</a>
-        </div>
-       </nav>
-    </header>
+        <nav class="nav_nave" >
+         <div class="nav_enlaces">
+           <a href="vacuna.php">vacuna</a>
+           <a href="role.php">role</a>
+           <a href="tipo.php">tipo</a>
+           <a href="user.php">user</a>
+         </div>
+        </nav>
+     </header>
     <form action="" method="post">
       <img src="img/logo-animal.png" alt="">
       <div class="form_conte" >
