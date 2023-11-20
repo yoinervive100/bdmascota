@@ -200,28 +200,27 @@ trait  Mascota{
       $id = $_POST["idmas"];
       $nombre = $_POST["mascota"];
       $fecha = $_POST["fecha"];
-      //$imagen = addslashes(file_get_contents($_FILES['imagen']['tmp_name']));
       $user = $_POST["iduser"];
       $mascota = $_POST["idmascota"];
       $raza = $_POST["idraza"];
       $con = $this->conexion->prepare("INSERT INTO mascota(id,nombre,FechaNacimiento,User,foto,TipoMascota_id,Raza_id)VALUES(:id,:nombre,:fecha,:user,NULL,:mascota,:raza)");
       $con->bindParam(':id',$id );
       $con->bindParam(':nombre',$nombre);
-      //$con->bindParam(':imagen',$imagen);
       $con->bindParam(':fecha',$fecha);
       $con->bindParam(':user',$user);
       $con->bindParam(':mascota',$mascota);
       $con->bindParam(':raza',$raza);
       $con->execute();
     }
-    if (isset($_POST["fecha"])){
+    if (isset($_POST["fecha"]) && isset($_POST["fecha1"])){
        $buscar = $_POST["fecha"];
+       $buscar1 = $_POST["fecha1"];
        $sql = $this->conexion->prepare("SELECT m.id, m.nombre, m.FechaNacimiento, r.nombre_raza, t.nombre_mascota FROM mascota m 
        INNER JOIN raza r
        on m.Raza_id = r.id
        INNER JOIN tipomascota t
        ON m.TipoMascota_id = t.id
-       where m.nombre = '$buscar';");
+       where m.FechaNacimiento BETWEEN '$buscar' AND '$buscar1';");
        $sql->execute();
        $cont = $sql->setFetchMode(PDO::FETCH_ASSOC);
        $result = $sql->fetchAll();
@@ -234,6 +233,8 @@ trait  Mascota{
              <th>FECHA</th>
              <th>RAZA</th>
              <th>TIPO MASCOTA</th>
+             <th>EDITAR</th>
+             <th>BORRAR</th>
            </tr>
          </thead>
           <tbody>
@@ -244,6 +245,8 @@ trait  Mascota{
                  <td><?php echo $resu['FechaNacimiento'];?></td>
                  <td><?php echo $resu['nombre_raza']  ?></td>
                  <td><?php echo $resu['nombre_mascota']; ?></td>
+                 <td><button><a href=""><img src="img/vector-lapiz.png" alt=""></a></button></td>
+                 <td><button class="color_delete" ><a href=""><img src="img/vector-basura.png" alt=""></a></button></td>
                </tr>
                <?php }?>
           </tbody>
@@ -269,8 +272,7 @@ trait  Mascota{
                       $sql = $this->conexion->prepare("SELECT * FROM raza");
                       $sql->execute();
                       while($fila = $sql->fetch(PDO::FETCH_ASSOC)){
-                          echo "<option value='".$fila['id']."'>".$fila['nombre_raza']."</option>";
-                        
+                          echo "<option value='".$fila['id']."'>".$fila['nombre_raza']."</option>";  
                       }
                    ?>
                 </select>
@@ -305,6 +307,8 @@ trait  Mascota{
             <th>FECHA</th>
             <th>RAZA</th>
             <th>TIPO MASCOTA</th>
+            <th>EDITAR</th>
+            <th>BORRAR</th>
           </tr>
         </thead>
          <tbody>
@@ -315,6 +319,8 @@ trait  Mascota{
                 <td><?php echo $resu['FechaNacimiento'];?></td>
                 <td><?php echo $resu['nombre_raza']  ?></td>
                 <td><?php echo $resu['nombre_mascota']; ?></td>
+                <td><button><a href=""><img src="img/vector-lapiz.png" alt=""></a></button></td>
+                <td><button class="color_delete" ><a href=""><img src="img/vector-basura.png" alt=""></a></button></td>
               </tr>
               <?php }?>
          </tbody>

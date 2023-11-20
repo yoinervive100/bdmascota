@@ -120,9 +120,6 @@
    <form action="" method="post">
     <div class="login_fondo">
       <div class="login_log" >
-        <div class="login_title" >
-      
-        </div>
         <div class="img_veterinario" >
           <img src="img/vector-nuevo.png" alt="">
         </div>

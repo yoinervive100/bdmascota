@@ -27,7 +27,7 @@ if($sessi == null){
         font-family: 'Roboto', sans-serif;
     }
     body{
-        background-image: url(img/img-animal.jpg);
+        background-image: url(img/vector-fondo.jpg);
         background-repeat: no-repeat;
         background-size: cover;
         height: 100vh;
@@ -36,6 +36,8 @@ if($sessi == null){
         display: flex;
         flex-direction: column;
         background-color: cornsilk;
+        background: linear-gradient(90deg, rgba(2,0,36,1) 0%, rgba(115,15,222,1) 0%, rgba(0,212,255,1) 100%);
+        color: white;
       }
       .panel_admini{
         display: flex;
@@ -43,16 +45,10 @@ if($sessi == null){
         align-items: center;
         padding: 1vh 3vh;
       }
-      .cerrar_sesion{
-        background-color:green;
-        text-decoration: none;
-        color: white;
-        padding: 1vh 2vh;
-        border-radius: 1vh;
-        font-size: 2.5vh;
+      .cerrar_sesion img{
+        height: 12vh;
       }
       form{
-        background-color: aqua;
         width: 50vh;
         display: flex;
         align-items: center;
@@ -60,7 +56,7 @@ if($sessi == null){
         flex-direction: column;
         margin: auto;
         margin-top: 5vh;
-        border-radius: 7px;
+        margin-left: 5vh;
         padding: 2vh;
       }
       .form_form{
@@ -93,7 +89,7 @@ if($sessi == null){
         font-size: 2vh;
       }
       .nav_nave{
-        background-color: aliceblue;
+        background: linear-gradient(90deg, rgba(2,0,36,1) 0%, rgba(115,15,222,1) 0%, rgba(0,44,255,1) 100%);
         padding: 1vh;
         display: flex;
         justify-content: center;
@@ -107,7 +103,7 @@ if($sessi == null){
         color: black;
       }
       .nav_enlaces a:hover{
-        color: green;
+        color: white;
       }
       a{
         text-decoration: none;
@@ -117,11 +113,17 @@ if($sessi == null){
       }
       .titulo_user{
         font-size: 2.5vh;
+        display: flex;
+        align-items: center;
+        gap: 2vh;
+      }
+      .titulo_user img{
+        height: 12vh;
       }
       table{
         position: absolute;
-        left:0;
-        top: 120%;
+        top: 40vh;
+        left: 65vh;
         background-color:bisque;
         border-collapse: collapse;
         text-align:center;
@@ -131,10 +133,33 @@ if($sessi == null){
         border-bottom: solid 5px yellow;
       }
       th,td{
-        padding: 10px;
+        padding: 10px 20px ;
       }
       tr:nth-child(even){
         background-color:#ddd;
+      }
+      td img{
+        height: 2.5vh;
+      }
+      .form_conte{
+        background: linear-gradient(90deg, rgba(2,0,36,1) 0%, rgba(57,163,214,1) 0%, rgba(0,44,255,1) 100%);
+        padding: 2vh 5vh;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        border-radius: 7px;
+      }
+      .form_fecha{
+         position: absolute;
+         top: 25vh;
+         left: 75vh;
+      }
+      .form_mover{
+        display: flex;
+        gap:2vh;
+      }
+      .color_delete{
+        background-color:red;
       }
 
 </style>
@@ -143,11 +168,16 @@ if($sessi == null){
     <header>
         <div class="panel_admini" >
          <div class="titulo_user" >
-           <h1>Panel De Administracion:</h1>
+          <div class="img_logo" >
+            <img src="img/logo-animal.png" alt="">
+          </div>
+          <div class="panel_user" >
+          <h1>Panel De Administracion:</h1>
            <h2>Bienvenido: <?php echo $_SESSION["usuario"] ?> </h2>
+          </div>
          </div>
-          <nav>
-           <a href="cerrar.php" class="cerrar_sesion" >cerrar sesion</a>
+          <nav> 
+            <a href="cerrar.php" class="cerrar_sesion" ><img src="img/vector-salir.png" alt=""></a>
           </nav> 
         </div>
         <nav class="nav_nave" >
@@ -160,8 +190,8 @@ if($sessi == null){
         </nav>
      </header>
     <form action="" method="post" enctype="multipart/form-data" >
-        <img src="img/logo-animal.png" alt="">
         <div class="form_conte" >
+        <img src="img/logo-animal.png" alt="">
           <div class="formulario_registro" >
             <div class="form_form" >
               <label for="">Ingrese el id</label>
@@ -176,17 +206,13 @@ if($sessi == null){
               <input type="date" name="fecha" >
             </div>
             <div class="form_form" >
-              <label for="">Ingrese la foto</label>
-              <input type="file"  name="imagen" >
-            </div>
-            <div class="form_form" >
                 <label for="">Ingrese el usuario</label>
                 <input type="text" placeholder="ingrese el id" name="iduser">
               </div>
              <?php
                 include_once "controller/mascota.php";
              ?>
-            <div class="buto_boton" >
+            <div class="buto_boton">
               <button type="submit">agregar</button>
             </div>
    
@@ -194,10 +220,12 @@ if($sessi == null){
         </div>
       </form>
 
-      <form action="" method="POST">
-              <label for="">Ingrese la FechaNacimiento</label>
-              <input type="text" name="fecha" >
-        <button type="submit" name="consultor" >consultar</button>
+      <form action="" method="POST" class="form_fecha" >
+        <div class="form_mover" >
+              <input type="date" name="fecha" >
+              <input type="date" name="fecha1" >
+              <button type="submit" name="consultor" >consultar</button>
+        </div>
       </form>
 
 </body>
