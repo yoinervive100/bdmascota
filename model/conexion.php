@@ -131,8 +131,39 @@ trait  Mascota{
       $sql->bindParam(':edad',$edad);
       $sql->bindParam(':adulto',$adulto);
       $sql->bindParam(':adult',$adult);
-      $sql->execute();
+      if ($sql->execute()) {
+        echo "<script>alert('actualizado');</script>";
+      }
     }
+    $conexi = $this->conexion->prepare("SELECT * FROM tipomascota");
+    $conexi->execute();
+    $con = $conexi->setFetchMode(PDO::FETCH_ASSOC);
+    $cont = $conexi->fetchAll();
+    ?>
+    <table>
+      <thead>
+        <tr>
+          <th>ID</th>
+          <th>NOMBRE</th>
+          <th>EDAD JOVEN</th>
+          <th>EDAD EQUVALENTE ADULTO</th>
+          <th>EDAD  ADULTO</th>
+        </tr>
+      </thead>
+      <tbody>
+        <?php foreach($cont as $mostrar){ ?> 
+          <tr>
+            <td><?php echo $mostrar['id'] ?></td>
+            <td><?php echo $mostrar['nombre_mascota'];?></td>
+            <td><?php echo $mostrar['EdadEquivalenteJoven'];?></td>
+            <td><?php echo $mostrar['EdadEquivalenteAdulto'];?></td>
+            <td><?php echo $mostrar['EdadAdulto'];?></td>
+            </tr>
+          <?php }?>
+      </tbody>
+    </table>
+    <?php
+
   }
   public function raza(){
     if(isset($_POST["idra"]) && isset($_POST["nomra"]) && isset($_POST["idmascot"])){

@@ -28,7 +28,7 @@ if($sessi == null){
         font-family: 'Roboto', sans-serif;
       }
       body{
-        background-image: url(img/img-animal.jpg);
+        background-image: url(img/vector-fondo.jpg);
         background-repeat: no-repeat;
         background-size: cover;
         height: 100vh;
@@ -95,6 +95,14 @@ if($sessi == null){
         display: flex;
         justify-content: center;
       }
+      .form_conte{
+        background: linear-gradient(90deg, rgba(2,0,36,1) 0%, rgba(57,163,214,1) 0%, rgba(0,44,255,1) 100%);
+        padding: 2vh 5vh;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        border-radius: 7px;
+      }
       .nav_enlaces{
         display: flex;
         gap: 3vh;
@@ -145,7 +153,7 @@ if($sessi == null){
         color: black;
       }
       .nav_enlaces a:hover{
-        color: green;
+        color: white;
       }
       a{
         text-decoration: none;
@@ -155,6 +163,32 @@ if($sessi == null){
       }
       .titulo_user{
         font-size: 2.5vh;
+      }
+      table{
+        position: absolute;
+        top: 40vh;
+        left: 65vh;
+        background: linear-gradient(90deg, rgba(2,0,36,1) 0%, rgba(112,57,214,1) 0%, rgba(92,55,221,1) 58%, rgba(0,44,255,1) 100%);
+        border-collapse: collapse;
+        text-align:center;
+        color:#131eda;
+      }
+      thead{
+        background-color:green;
+        border-bottom: solid 5px yellow;
+      }
+      th,td{
+        padding: 10px 20px ;
+      }
+      td{
+        color:white;
+      }
+      tr:nth-child(even){
+        background: linear-gradient(90deg, rgba(2,0,36,1) 0%, rgba(112,57,214,1) 0%, rgba(0,44,255,1) 100%);
+
+      }
+      td img{
+        height: 2.5vh;
       }
 
     </style>
@@ -183,8 +217,8 @@ if($sessi == null){
         </nav>
      </header>
     <form action="" method="post">
-      <img src="img/logo-animal.png" alt="">
       <div class="form_conte" >
+         <img src="img/logo-animal.png" alt="">
         <div class="formulario_registro" >
           <div class="form_form" >
             <label for="">Ingrese el tipo mascota</label>
@@ -211,11 +245,12 @@ if($sessi == null){
           </div>
  
         </div>
+        </div>
       </div>
     </form>
 </body>
 <?php
-include_once "controller/connect.php";
+include_once "controller/tipo.php";
 ?>
 
 </html>

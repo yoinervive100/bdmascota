@@ -8,7 +8,6 @@ class Dog{
 }
 
 $con = new Dog();
-$con->tipo_mascota();
 $con->login();
 $con->user();
 $con->role();
