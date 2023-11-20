@@ -61,8 +61,37 @@ trait  Mascota{
        $pre = $this->conexion->prepare("INSERT INTO rol(id,nombre)VALUES(:id,:nombre)");
        $pre->bindParam('id',$id);
        $pre->bindParam('nombre',$nom);
-       $pre->execute();
+       if ($pre->execute()) {
+        echo "<script>alert('registro exitoso');</script>";
+       }
     }
+    $nuevo = $this->conexion->prepare("SELECT * FROM rol");
+    $nuevo->execute();
+    $cont = $nuevo->setFetchMode(PDO::FETCH_ASSOC);
+    $result = $nuevo->fetchAll();
+    ?>
+    <table>
+    <thead>
+        <tr>
+          <th>ID</th>
+          <th>NOMBRE</th>
+          <th>EDITAR</th>
+          <th>ELIMINAR</th>
+        </tr>
+      </thead>
+       <tbody>
+          <?php foreach($result as $resu){ ?> 
+            <tr>
+              <td><?php echo $resu['id']; ?></td>
+              <td><?php echo $resu['nombre']; ?></td>
+              <td><button><a href=""><img src="img/vector-lapiz.png" alt=""></a></button></td>
+              <td><button class="color_delete" ><a href=""><img src="img/vector-basura.png" alt=""></a></button></td>
+            </tr>
+            <?php }?>
+       </tbody>
+    </table>  
+   <?php 
+  
   }
   public function vacuna(){
     if (isset($_POST["t1"]) && isset($_POST["t2"])){
@@ -148,6 +177,8 @@ trait  Mascota{
           <th>EDAD JOVEN</th>
           <th>EDAD EQUVALENTE ADULTO</th>
           <th>EDAD  ADULTO</th>
+          <th>EDITAR</th>
+          <th>ELIMINAR</th>
         </tr>
       </thead>
       <tbody>
@@ -158,6 +189,8 @@ trait  Mascota{
             <td><?php echo $mostrar['EdadEquivalenteJoven'];?></td>
             <td><?php echo $mostrar['EdadEquivalenteAdulto'];?></td>
             <td><?php echo $mostrar['EdadAdulto'];?></td>
+            <td><button><a href=""><img src="img/vector-lapiz.png" alt=""></a></button></td>
+            <td><button class="color_delete" ><a href=""><img src="img/vector-basura.png" alt=""></a></button></td>
             </tr>
           <?php }?>
       </tbody>

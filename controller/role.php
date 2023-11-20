@@ -2,18 +2,9 @@
 
 require_once "C:xampp\htdocs\mascota\model\conexion.php";
 
-
-class Dog{
+class Role{
     use Mascota;
 }
 
-$con = new Dog();
-$con->login();
-$con->user();
-
-
-//$con->editar();
-
-
-
-?>
+$tipo = new Role();
+$tipo->role();

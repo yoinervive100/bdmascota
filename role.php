@@ -27,49 +27,30 @@ if($sessi == null){
             box-sizing: border-box;
             font-family: 'Roboto', sans-serif;
         }
-        header{
-         display: flex;
-         flex-direction: column;
-         background-color: cornsilk;
-        }
         body{
             background-image: url(img/vector-fondo.jpg);
             background-repeat: no-repeat;
             background-size: cover;
             height: 100vh;
         }
+        header{
+        display: flex;
+        flex-direction: column;
+        background-color: cornsilk;
+        background: linear-gradient(90deg, rgba(2,0,36,1) 0%, rgba(115,15,222,1) 0%, rgba(0,212,255,1) 100%);
+        color: white;
+      }
       .panel_admini{
         display: flex;
         justify-content: space-between;
         align-items: center;
         padding: 1vh 3vh;
       }
-      .cerrar_sesion{
-        background-color:green;
-        text-decoration: none;
-        color: white;
-        padding: 1vh 2vh;
-        border-radius: 1vh;
-        font-size: 2.5vh;
+      .cerrar_sesion img{
+        height: 12vh;
       }
-      form{
-        background-color: aqua;
-        width: 30vh;
-        margin: auto;
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
-        align-items: center;
-        padding: 2vh 8vh;
-        border-radius: 1vh;
-        gap: 1vh;
-        margin-top: 14vh;
-      }
-      img{
-        height: 17vh;
-      }
-      .nav_nave{
-        background-color: aliceblue;
+      .nav_nave{     
+        background: linear-gradient(90deg, rgba(2,0,36,1) 0%, rgba(115,15,222,1) 0%, rgba(0,44,255,1) 100%);
         padding: 1vh;
         display: flex;
         justify-content: center;
@@ -83,10 +64,29 @@ if($sessi == null){
         color: black;
       }
       .nav_enlaces a:hover{
-        color: green;
+        color: white;
       }
       a{
         text-decoration: none;
+      }
+      form{
+        width: 30vh;
+        margin: auto;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        padding: 2vh 8vh;
+        border-radius: 1vh;
+        gap: 1vh;
+        margin-top: 14vh;
+        margin-left: 14vh;
+      }
+      img{
+        height: 17vh;
+      }
+      .form_formulario{
+        
       }
       label{
         font-size: 2.5vh;
@@ -114,8 +114,53 @@ if($sessi == null){
       }
       .titulo_user{
         font-size: 2.5vh;
+        display: flex;
+        align-items: center;
+        gap:2vh; 
+      }
+      .titulo_user img{
+        height: 12vh;
+      }
+     .form_conte{
+        background: linear-gradient(90deg, rgba(2,0,36,1) 0%, rgba(57,163,214,1) 0%, rgba(0,44,255,1) 100%);
+        padding: 2vh 3vh;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        border-radius: 7px;
+        gap:1vh;
+      }
+      table{
+        position: absolute;
+        left:60vh;
+        top: 38vh;
+        background: linear-gradient(90deg, rgba(2,0,36,1) 0%, rgba(112,57,214,1) 0%, rgba(92,55,221,1) 58%, rgba(0,44,255,1) 100%);
+        border-collapse: collapse;
+        text-align:center;
+        color:#131eda;
+      }
+      thead{
+        background-color:green;
+        border-bottom: solid 5px yellow;
+      }
+      th,td{
+        padding: 10px 17px;
+      }
+      td{
+        color:white;
+      }
+      tr:nth-child(even){
+        background: linear-gradient(90deg, rgba(2,0,36,1) 0%, rgba(112,57,214,1) 0%, rgba(0,44,255,1) 100%);
+
+      }
+      td img{
+        height: 2.5vh;
+      }
+      .color_delete{
+        background-color:red;
       }
     </style>
+
          <header>
         <div class="panel_admini" >
          <div class="titulo_user" >
@@ -141,18 +186,24 @@ if($sessi == null){
         </nav>
      </header>
     <form action="" method="post">
-        <img src="img/logo-animal.png" alt="">
+      <div class="form_conte" >
+      <img src="img/logo-animal.png" alt="">
         <div class="form_formulario" >
-            <label for="">ingrese el id roles</label><br>
-            <input type="text" name="nomm" placeholder="introduzca el id"><br>
+          <div class="form_form" >
+          <label for="">ingrese el id roles</label><br>
+            <input type="text" name="nomm" placeholder="introduzca el id">
+          </div>
+            <div class="form_form" >
             <label for="">ingrese el nombre</label><br>
-            <input type="text" name="idd" placeholder="introduzca el nombre"><br>
+            <input type="text" name="idd" placeholder="introduzca el nombre">
+            </div>
             <div class="buton_boton" >
                 <button type="submit">registrar</button>
             </div>
         </div>
+      </div>
         <?php 
-         include_once "controller/connect.php";
+         include_once "controller/role.php";
         ?>
     </form>
 </body>

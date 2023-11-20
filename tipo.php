@@ -190,6 +190,9 @@ if($sessi == null){
       td img{
         height: 2.5vh;
       }
+      .color_delete{
+        background-color:red;
+      }
 
     </style>
     <header>
