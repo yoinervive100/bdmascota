@@ -156,15 +156,23 @@ if($sessi == null){
       }
       .form_fecha{
          position: absolute;
-         top: 25vh;
+         top: 20vh;
          left: 75vh;
       }
-      .form_mover{
-        display: flex;
+      .mover{
+        display: grid;
         gap:2vh;
+        grid-template-columns: 2fr 2fr;   
       }
       .color_delete{
         background-color:red;
+      }
+      .form_conte input{
+         margin: 1vh 0;
+      }
+      .form_mover,.filtro{
+        display: flex;
+        flex-direction: column;
       }
 
 </style>
@@ -226,11 +234,17 @@ if($sessi == null){
       </form>
 
       <form action="" method="POST" class="form_fecha" >
+        <div class="mover">
         <div class="form_mover" >
               <input type="date" name="fecha" >
               <input type="date" name="fecha1" >
-              <button type="submit" name="consultor" >consultar</button>
         </div>
+        <div class="filtro">
+              <input type="text" name="filt" placeholder="hola"  >
+              <input type="text" name="filt1" >
+        </div>
+        </div>
+        <button type="submit" name="consultor" >consultar</button>
       </form>
 
 </body>

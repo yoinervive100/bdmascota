@@ -29,7 +29,7 @@ trait  Mascota{
      if ($usuario){
        session_start();
        $_SESSION["usuario"] = $nom;
-       header("location:user.php");
+       header("location:mascota.php");
      }else{
       ?>
       <h4 class="color">no existe</h4>
@@ -210,7 +210,7 @@ trait  Mascota{
       $con->execute();
     }
     $nu = $this->conexion->prepare("SELECT r.id, r.nombre_raza,count(m.Raza_id) raza FROM mascota m
-    INNER JOIN raza r
+    RIGHT JOIN raza r
     ON m.Raza_id = r.id
     GROUP BY r.id, r.nombre_raza");
     $nu->execute();
@@ -248,7 +248,7 @@ trait  Mascota{
           <tr>
             <td><?php echo $mostrar['id'] ?></td>
             <td><?php echo $mostrar['nombre_raza'] ?></td>
-            <td><?php echo $mostrar['raza'] ?></td>
+            <td><?php echo $mostrar['raza'];?></td>
             </tr>
           <?php }?>
       </tbody>
@@ -280,48 +280,143 @@ trait  Mascota{
         ?>
          <h4>error el registro</h4>
         <?php
+        
       }
     }
-    if (isset($_POST["fecha"]) && isset($_POST["fecha1"])){
-       $buscar = $_POST["fecha"];
-       $buscar1 = $_POST["fecha1"];
-       $sql = $this->conexion->prepare("SELECT m.id, m.nombre, m.FechaNacimiento, r.nombre_raza, t.nombre_mascota FROM mascota m 
-       INNER JOIN raza r
-       on m.Raza_id = r.id
-       INNER JOIN tipomascota t
-       ON m.TipoMascota_id = t.id
-       where m.FechaNacimiento BETWEEN '$buscar' AND '$buscar1';");
-       $sql->execute();
-       $cont = $sql->setFetchMode(PDO::FETCH_ASSOC);
-       $result = $sql->fetchAll();
-       ?>
-       <table>
-       <thead>
-           <tr>
-             <th>ID</th>
-             <th>NOMBRE</th>
-             <th>FECHA</th>
-             <th>RAZA</th>
-             <th>TIPO MASCOTA</th>
-             <th>EDITAR</th>
-             <th>BORRAR</th>
-           </tr>
-         </thead>
-          <tbody>
-             <?php foreach($result as $resu){ ?> 
-               <tr>
-                 <td><?php echo $resu['id']; ?></td>
-                 <td><?php echo $resu['nombre']; ?></td>
-                 <td><?php echo $resu['FechaNacimiento'];?></td>
-                 <td><?php echo $resu['nombre_raza']  ?></td>
-                 <td><?php echo $resu['nombre_mascota']; ?></td>
-                 <td><button><a href=""><img src="img/vector-lapiz.png" alt=""></a></button></td>
-                 <td><button class="color_delete" ><a href=""><img src="img/vector-basura.png" alt=""></a></button></td>
-               </tr>
-               <?php }?>
-          </tbody>
-       </table>
-      <?php  
+     
+    if (isset($_POST["consultor"])) {
+      if (isset($_POST["filt"])){
+        $filt = $_POST["filt"];
+        $sql = $this->conexion->prepare("SELECT m.id, m.nombre, m.FechaNacimiento, r.nombre_raza, t.nombre_mascota FROM mascota m 
+        INNER JOIN raza r
+        on m.Raza_id = r.id
+        INNER JOIN tipomascota t
+        ON m.TipoMascota_id = t.id
+        where m.nombre = '$filt';");
+        if ($sql->execute()) {
+           $cont = $sql->setFetchMode(PDO::FETCH_ASSOC);
+          $result = $sql->fetchAll();
+          
+        ?>
+        <table>
+        <thead>
+            <tr>
+              <th>ID</th>
+              <th>NOMBRE</th>
+              <th>FECHA</th>
+              <th>RAZA</th>
+              <th>TIPO MASCOTA</th>
+              <th>EDITAR</th>
+              <th>BORRAR</th>
+            </tr>
+          </thead>
+           <tbody>
+              <?php foreach($result as $resu){ ?> 
+                <tr>
+                  <td><?php echo $resu['id']; ?></td>
+                  <td><?php echo $resu['nombre']; ?></td>
+                  <td><?php echo $resu['FechaNacimiento'];?></td>
+                  <td><?php echo $resu['nombre_raza']  ?></td>
+                  <td><?php echo $resu['nombre_mascota']; ?></td>
+                  <td><button><a href="#"><img src="img/vector-lapiz.png" alt=""></a></button></td>
+                  <td><button class="color_delete" ><a href="#"><img src="img/vector-basura.png" alt=""></a></button></td>
+                </tr>
+                <?php }?>
+           </tbody>
+        </table>
+        <?php 
+          
+        }
+        if (!empty($_POST["filt1"])){
+          $filt1 = $_POST["filt1"];
+          $sql = $this->conexion->prepare("SELECT m.id, m.nombre, m.FechaNacimiento, r.nombre_raza, t.nombre_mascota FROM mascota m 
+          INNER JOIN raza r
+          on m.Raza_id = r.id
+          INNER JOIN tipomascota t
+          ON m.TipoMascota_id = t.id
+          where r.nombre_raza = '$filt1';");
+          if ($sql->execute()) {
+             $cont = $sql->setFetchMode(PDO::FETCH_ASSOC);
+            $result = $sql->fetchAll();
+            
+          ?>
+          <table>
+          <thead>
+              <tr>
+                <th>ID</th>
+                <th>NOMBRE</th>
+                <th>FECHA</th>
+                <th>RAZA</th>
+                <th>TIPO MASCOTA</th>
+                <th>EDITAR</th>
+                <th>BORRAR</th>
+              </tr>
+            </thead>
+             <tbody>
+                <?php foreach($result as $resu){ ?> 
+                  <tr>
+                    <td><?php echo $resu['id']; ?></td>
+                    <td><?php echo $resu['nombre']; ?></td>
+                    <td><?php echo $resu['FechaNacimiento'];?></td>
+                    <td><?php echo $resu['nombre_raza']  ?></td>
+                    <td><?php echo $resu['nombre_mascota']; ?></td>
+                    <td><button><a href="#"><img src="img/vector-lapiz.png" alt=""></a></button></td>
+                    <td><button class="color_delete" ><a href="#"><img src="img/vector-basura.png" alt=""></a></button></td>
+                  </tr>
+                  <?php }?>
+             </tbody>
+          </table>
+          <?php 
+  
+        } }
+        
+       if(!empty($_POST["fecha"]) && !empty($_POST["fecha1"])){
+        $buscar = $_POST["fecha"];
+        $buscar1 = $_POST["fecha1"];
+        $sql = $this->conexion->prepare("SELECT m.id, m.nombre, m.FechaNacimiento, r.nombre_raza, t.nombre_mascota FROM mascota m 
+        INNER JOIN raza r
+        on m.Raza_id = r.id
+        INNER JOIN tipomascota t
+        ON m.TipoMascota_id = t.id
+        where m.FechaNacimiento BETWEEN '$buscar' AND '$buscar1';");
+        
+         if($sql->execute()){
+          $cont = $sql->setFetchMode(PDO::FETCH_ASSOC);
+           $result = $sql->fetchAll();
+         }
+        
+        
+        ?>
+        <table>
+        <thead>
+            <tr>
+              <th>ID</th>
+              <th>NOMBRE</th>
+              <th>FECHA</th>
+              <th>RAZA</th>
+              <th>TIPO MASCOTA</th>
+              <th>EDITAR</th>
+              <th>BORRAR</th>
+            </tr>
+          </thead>
+           <tbody>
+              <?php foreach($result as $resu){ ?> 
+                <tr>
+                  <td><?php echo $resu['id']; ?></td>
+                  <td><?php echo $resu['nombre']; ?></td>
+                  <td><?php echo $resu['FechaNacimiento'];?></td>
+                  <td><?php echo $resu['nombre_raza']  ?></td>
+                  <td><?php echo $resu['nombre_mascota']; ?></td>
+                  <td><button><a href="#"><img src="img/vector-lapiz.png" alt=""></a></button></td>
+                  <td><button class="color_delete" ><a href="#"><img src="img/vector-basura.png" alt=""></a></button></td>
+                </tr>
+                <?php }?>
+           </tbody>
+        </table>
+       <?php  
+      
+     }
+      } 
     }else {
       $sql = $this->conexion->prepare("SELECT m.id, m.nombre, m.FechaNacimiento, r.nombre_raza, t.nombre_mascota FROM mascota m 
     INNER JOIN raza r
@@ -389,16 +484,15 @@ trait  Mascota{
                 <td><?php echo $resu['FechaNacimiento'];?></td>
                 <td><?php echo $resu['nombre_raza']  ?></td>
                 <td><?php echo $resu['nombre_mascota']; ?></td>
-                <td><button><a href=""><img src="img/vector-lapiz.png" alt=""></a></button></td>
-                <td><button class="color_delete" ><a href=""><img src="img/vector-basura.png" alt=""></a></button></td>
+                <td><button><a href="#"><img src="img/vector-lapiz.png" alt=""></a></button></td>
+                <td><button class="color_delete" ><a href="#"><img src="img/vector-basura.png" alt=""></a></button></td>
               </tr>
               <?php }?>
          </tbody>
       </table>
-     <?php  
+     <?php
     }
     
-
   }
 
 }
