@@ -162,7 +162,8 @@ if($sessi == null){
       .mover{
         display: grid;
         gap:2vh;
-        grid-template-columns: 2fr 2fr;   
+        grid-template-columns: 2fr 2fr 2fr;   
+        align-items: center;
       }
       .color_delete{
         background-color:red;
@@ -235,16 +236,20 @@ if($sessi == null){
 
       <form action="" method="POST" class="form_fecha" >
         <div class="mover">
-        <div class="form_mover" >
+          <div class="form_mover" >
               <input type="date" name="fecha" >
               <input type="date" name="fecha1" >
-        </div>
-        <div class="filtro">
+          </div>
+          <div class="filtro">
               <input type="text" name="filt" placeholder="hola"  >
               <input type="text" name="filt1" >
+          </div>
+          <div class="const" >
+           <button type="submit" name="consultor" >consultar</button>
+          </div>
         </div>
-        </div>
-        <button type="submit" name="consultor" >consultar</button>
+        
+       
       </form>
 
 </body>
