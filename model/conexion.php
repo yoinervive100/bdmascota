@@ -123,7 +123,7 @@ trait  Mascota{
             <tr>
               <td><?php echo $resu['id']; ?></td>
               <td><?php echo $resu['nombre']; ?></td>
-              <td><button><a href=""><img src="img/vector-lapiz.png" alt=""></a></button></td>
+              <td><a href="vacuna.php?=<?php echo $resu['id'];?>"><img src="img/vector-lapiz.png" alt=""></a></td>
               <td><button class="color_delete" ><a href=""><img src="img/vector-basura.png" alt=""></a></button></td>
             </tr>
             <?php }?>
@@ -132,8 +132,8 @@ trait  Mascota{
    <?php 
      if($_GET){
         if (isset($_POST["enviar"])){
-            $t1=$_GET['id'];
-            //echo $t1;
+          $t1=$_POST['id'];
+          echo $t1;
             $nom = $_POST["th"];
             $ex = $this->conexion->prepare("UPDATE vacuna SET nombre=:nombre  WHERE id=:id");
             $ex->bindParam(':id',$t1);
@@ -274,14 +274,14 @@ trait  Mascota{
       $con->bindParam(':user',$user);
       $con->bindParam(':mascota',$mascota);
       $con->bindParam(':raza',$raza);
-      //if ($con->execute()) {
-        //echo "<script>alert('agregado');</script>";
-      //}else{
-        //?>
+      if ($con->execute()) {
+        echo "<script>alert('agregado');</script>";
+      }else{
+        ?>
          <h4>error el registro</h4>
-        //<?php
+        <?php
         
-     // }
+      }
     }
      
     if (isset($_POST["consultor"])) {
@@ -318,7 +318,7 @@ trait  Mascota{
                   <td><?php echo $resu['FechaNacimiento'];?></td>
                   <td><?php echo $resu['nombre_raza']  ?></td>
                   <td><?php echo $resu['nombre_mascota']; ?></td>
-                  <td><a href="mascota/vacuna.php"><button><img src="img/vector-lapiz.png" alt=""></button></a></td>
+                  <td><a href="actualizar_mascota.php"><img src="img/vector-lapiz.png" alt=""></a></td>
                   <td><button class="color_delete" ><a href=""><img src="img/vector-basura.png" alt=""></a></button></td>
                 </tr>
                 <?php }?>
@@ -360,7 +360,7 @@ trait  Mascota{
                     <td><?php echo $resu['FechaNacimiento'];?></td>
                     <td><?php echo $resu['nombre_raza']  ?></td>
                     <td><?php echo $resu['nombre_mascota']; ?></td>
-                    <td><a href="mascota/vacuna.php"><button><img src="img/vector-lapiz.png" alt=""></button></a></td>
+                    <td><a href="actualizar_mascota.php"><img src="img/vector-lapiz.png" alt=""></a></td>                    
                     <td><button class="color_delete" ><a href="#"><img src="img/vector-basura.png" alt=""></a></button></td>
                   </tr>
                   <?php }?>
@@ -407,7 +407,7 @@ trait  Mascota{
                   <td><?php echo $resu['FechaNacimiento'];?></td>
                   <td><?php echo $resu['nombre_raza']  ?></td>
                   <td><?php echo $resu['nombre_mascota']; ?></td>
-                  <td><button><a href="mascota/vacuna.php"><img src="img/vector-lapiz.png" alt=""></a></button></td>
+                  <td><a href="actualizar_mascota.php"><img src="img/vector-lapiz.png" alt=""></a></td>
                   <td><button class="color_delete" ><a href="#"><img src="img/vector-basura.png" alt=""></a></button></td>
                 </tr>
                 <?php }?>
@@ -484,7 +484,7 @@ trait  Mascota{
                 <td><?php echo $resu['FechaNacimiento'];?></td>
                 <td><?php echo $resu['nombre_raza']  ?></td>
                 <td><?php echo $resu['nombre_mascota']; ?></td>
-                <td><a href="mascota/raza.php"><button><img src="img/vector-lapiz.png" alt=""></button></a></td>
+                <td><a href="actualizar_mascota.php?=<?php echo $resu['id'];?>"><img src="img/vector-lapiz.png" alt=""></a></td>
                 <td><button class="color_delete" ><a href="#"><img src="img/vector-basura.png" alt=""></a></button></td>
               </tr>
               <?php }?>
@@ -496,71 +496,28 @@ trait  Mascota{
     
   }
   public function actualizar(){
-    if ($_GET) {
-      if (isset($_POST["no"]) && isset($_POST["fec"]) && isset($_POST["u"])){
+    if($_GET){
+      $id = $_GET['id'];
+      echo "$id";
+      if (isset($_POST["envi"])){
         $nombre = $_POST["no"];
         $fecha = $_POST["fec"];
-        $usuario = $_POST["u"];
-        $raza = $_POST["raza"];
-        $id = $_GET["id"];
-        echo $id;
-        $mascota = $_POST["idmascot"];
         $cont = $this->conexion->prepare("UPDATE mascota m
         INNER JOIN raza r
         on m.Raza_id = r.id
         INNER JOIN tipomascota t
         ON m.TipoMascota_id = t.id
-        SET  m.nombre = :nombre, m.FechaNacimiento = :fecha, r.nombre_raza = :raza, t.nombre_mascota = :mascota 
+        SET  m.nombre = :nombre, m.FechaNacimiento = :fecha
         WHERE m.id = :id;");
         $cont->bindParam(':fecha',$fecha);
         $cont->bindParam(':nombre',$nombre);
-        $cont->bindParam(':usu',$usuario);
-        $cont->bindParam(':raza',$raza);
-        $cont->bindParam(':mascota',$mascota);
         $cont->bindParam(':id',$id);
-        if ($cont->execute()){
-          echo "<script>alert('actualizado');</script>";
-        }
+        $con->execute();
+        echo "<script>alert('agregado');</script>";
       }
-    }
-    
+      }
 
-    ?>
-    <div class="lista_listar" >
-      <label for="">Ingrese la raza</label>
-      <select name="raza" id="">
-       <option  value="">seleccionar</option>
-        <?php
-          $sql = $this->conexion->prepare("SELECT * FROM raza");
-          $sql->execute();
-          while($fila = $sql->fetch(PDO::FETCH_ASSOC)){
-              echo "<option value='".$fila['id']."'>".$fila['nombre_raza']."</option>";  
-          }
-       ?>
-    </select>
-  </div>
-<?php
-
- ?>
- 
-    <div class="lista_listar" >
-      <label for="">Ingrese el tipo mascota</label>
-      <select name="idmascot" id="">
-       <option  value="">seleccionar</option>
-        <?php
-          $sql = $this->conexion->prepare("SELECT * FROM tipomascota");
-          $sql->execute();
-          $fila = $sql->setFetchMode(PDO::FETCH_ASSOC);
-          $mila = $sql->fetchAll(); 
-          foreach( $mila as $fila ){
-              echo "<option value='".$fila['id']."'>".$fila['nombre_mascota']."</option>";
-            
-          }
-       ?>
-    </select>
-  </div>
-<?php
-    
+  
   }
 
 }

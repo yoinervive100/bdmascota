@@ -145,10 +145,6 @@ if ($sesi = ""){
                 <label for=""> ingrese  la fecha nacimiento</label>
                 <input type="date" nanme="fec">
             </div>
-            <div class="lista_listar">
-                <label for=""> ingrese el usuario</label>
-                <input type="text" placeholder="ingrese el usuario" name="u">
-            </div>
             <?php require_once "controller/actualizar.php"; ?>
             <div class="boton" >
                 <button type="submit">actualizar</button>
