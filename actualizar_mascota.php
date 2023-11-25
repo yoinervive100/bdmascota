@@ -134,7 +134,7 @@ if ($sesi = ""){
          </div>
         </nav>
      </header>
-      <form action="" method="post">
+      <form action="" method="get">
         <div class="form_conte">
         <img src="img/logo-animal.png" alt="">
         <div class="lista_listar">
@@ -147,7 +147,7 @@ if ($sesi = ""){
             </div>
             <?php require_once "controller/actualizar.php"; ?>
             <div class="boton" >
-                <button type="submit">actualizar</button>
+                <button type="submit" name="envi" >actualizar</button>
             </div>
         </div>
         </form>

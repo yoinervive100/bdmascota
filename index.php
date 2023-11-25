@@ -37,7 +37,7 @@
             gap: 3vh;
             border-radius: 2vh;
             margin: auto;
-            margin-top: 14vh;
+            margin-top: 10vh;
   
         }
         .input_wars{
@@ -148,6 +148,9 @@
     <?php
      include_once "controller/connect.php";
     ?> 
+     <div class="registrar" >
+      <a href="user.php">registrarse</a>
+   </div>
    </form>
 </body>
 </html>

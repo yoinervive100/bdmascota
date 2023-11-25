@@ -214,8 +214,9 @@ if($sessi == null){
          <div class="nav_enlaces">
            <a href="vacuna.php">vacuna</a>
            <a href="role.php">role</a>
+           <a href="mascota.php">mascota</a>
            <a href="tipo.php">tipo</a>
-           <a href="user.php">user</a>
+           <a href="raza.php">raza</a>
          </div>
         </nav>
      </header>

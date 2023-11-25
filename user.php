@@ -1,12 +1,4 @@
-<?php
-session_start();
-$sessi = $_SESSION["usuario"];
-if($sessi == null){
-  echo "usted no tiene autorizacion";
-  die();
-} 
 
-?>
 
 <!DOCTYPE html>
 <html lang="en">
@@ -25,8 +17,7 @@ if($sessi == null){
           font-family: 'Roboto', sans-serif;
         }
         body{
-            background-image: url(img/img-animal.jpg);
-            background-repeat: no-repeat;
+             background-image: url(img/vector-fondo.jpg);            background-repeat: no-repeat;
             background-size: cover;
             height: 100vh;
         }
@@ -50,7 +41,7 @@ if($sessi == null){
         font-size: 2.5vh;
       }
       form{
-        background-color: aqua;
+        background: linear-gradient(90deg, rgba(2,0,36,1) 0%, rgba(57,163,214,1) 0%, rgba(0,44,255,1) 100%);
         width: 40vh;
         margin: auto;
         display: flex;
@@ -118,25 +109,7 @@ if($sessi == null){
         gap: 1vh;
       }
     </style>
-         <header>
-        <div class="panel_admini" >
-         <div class="titulo_user" >
-           <h1>Panel De Administracion:</h1>
-           <h2>Bienvenido: <?php echo $_SESSION["usuario"] ?> </h2>
-         </div>
-          <nav>
-           <a href="cerrar.php" class="cerrar_sesion" >cerrar sesion</a>
-          </nav> 
-        </div>
-        <nav class="nav_nave" >
-         <div class="nav_enlaces">
-           <a href="vacuna.php">vacuna</a>
-           <a href="role.php">role</a>
-           <a href="tipo.php">tipo</a>
-           <a href="user.php">user</a>
-         </div>
-        </nav>
-     </header>
+         
     <form action="" method="post">
       <img src="img/logo-animal.png" alt="">
       <div class="form_formulario" >

@@ -51,7 +51,9 @@ trait  Mascota{
        $cont->bindParam(':email',$email);
        $cont->bindParam(':passwor',$password);
        $cont->bindParam(':roles',$role);
-       $cont->execute();
+       if ($cont->execute()){
+        echo "<script>alert('registro exitoso');</script>";
+       }
     }
   }
   public function role(){
@@ -130,22 +132,20 @@ trait  Mascota{
        </tbody>
     </table>  
    <?php 
-     if($_GET){
-        if (isset($_POST["enviar"])){
-          $t1=$_POST['id'];
-          echo $t1;
-            $nom = $_POST["th"];
-            $ex = $this->conexion->prepare("UPDATE vacuna SET nombre=:nombre  WHERE id=:id");
-            $ex->bindParam(':id',$t1);
-            $ex->bindParam(':nombre',$nom);
-            if ($ex->execute()) {
-               echo "<script>alert('actualizado');</script>";
-            }
-          }
-      }
-  
-      }
 
+    if (isset($_POST["enviar"])){
+      $nom = $_POST["th"];
+      $vacu = $this->conexion->prepare("UPDATE vacuna SET nombre=:nom  WHERE id=:id;");
+      $vacu->bindParam(':nom',$nom);
+      $vacu->bindParam(':id',$t1);
+      $vacu->execute();
+      echo "registro agregado";
+
+    }
+
+}
+      
+        
 
   public function tipo_mascota(){
     if(isset($_POST["id"]) && isset($_POST["nombre"]) && isset($_POST["edad"]) && isset($_POST["adulto"]) && isset($_POST["adult"])){
@@ -496,27 +496,6 @@ trait  Mascota{
     
   }
   public function actualizar(){
-    if($_GET){
-      $id = $_GET['id'];
-      echo "$id";
-      if (isset($_POST["envi"])){
-        $nombre = $_POST["no"];
-        $fecha = $_POST["fec"];
-        $cont = $this->conexion->prepare("UPDATE mascota m
-        INNER JOIN raza r
-        on m.Raza_id = r.id
-        INNER JOIN tipomascota t
-        ON m.TipoMascota_id = t.id
-        SET  m.nombre = :nombre, m.FechaNacimiento = :fecha
-        WHERE m.id = :id;");
-        $cont->bindParam(':fecha',$fecha);
-        $cont->bindParam(':nombre',$nombre);
-        $cont->bindParam(':id',$id);
-        $con->execute();
-        echo "<script>alert('agregado');</script>";
-      }
-      }
-
   
   }
 
