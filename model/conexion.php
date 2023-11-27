@@ -207,7 +207,9 @@ trait  Mascota{
       $con->bindParam(':id',$id);
       $con->bindParam('nombre',$nombre);
       $con->bindParam('mascota',$idmas);
-      $con->execute();
+      if ($con->execute()) {
+        echo "<script>alert('registro exitoso');</script>";
+      }
     }
     $nu = $this->conexion->prepare("SELECT r.id, r.nombre_raza,count(m.Raza_id) raza FROM mascota m
     RIGHT JOIN raza r
