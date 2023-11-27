@@ -136,7 +136,9 @@ CREATE TABLE IF NOT EXISTS `mydb`.`controlvacuna` (
     REFERENCES `mydb`.`vacuna` (`id`))
 ENGINE = InnoDB
 DEFAULT CHARACTER SET = utf8mb3;
-insert into rol values(1,"jefe");
+insert into raza values(2,"chiguaga",1);
+insert into tipomascota values(1,"putbul",10,20,5);
+insert into vacuna values(1,"rabia");
 
 SET SQL_MODE=@OLD_SQL_MODE;
 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS;
