@@ -53,6 +53,7 @@ trait  Mascota{
        $cont->bindParam(':roles',$role);
        if ($cont->execute()){
         echo "<script>alert('registro exitoso');</script>";
+      
        }
     }
   }
@@ -65,6 +66,7 @@ trait  Mascota{
        $pre->bindParam('nombre',$nom);
        if ($pre->execute()) {
         echo "<script>alert('registro exitoso');</script>";
+        header("location:index.php");
        }
     }
     $nuevo = $this->conexion->prepare("SELECT * FROM rol");
