@@ -1,5 +1,5 @@
 <?php
-require_once "C:xampp\htdocs\mascota/bdmascota\model\conexion.php";
+require_once(__DIR__ . "./model.php");
 
 class Actualizar
 {

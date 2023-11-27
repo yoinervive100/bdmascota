@@ -146,7 +146,7 @@
        <button type="submit">iniciar</button>
     </div>
     <?php
-     include_once "controller/connect.php";
+     require_once("controller/connect.php");
     ?> 
      <div class="registrar" >
       <a href="user.php">registrarse</a>
